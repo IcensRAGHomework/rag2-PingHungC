@@ -35,10 +35,10 @@ def hw02_2(q2_pdf):
     
     pdf_texts = text_splitter.split_text(pdf_text_list)
 
-    print(len(pdf_texts))
-    for i in range(0, len(pdf_texts)):
-        print("///////////////     chunk [%d]     ///////////////" % (i+1))
-        print(pdf_texts[i])
+    # print(len(pdf_texts))
+    # for i in range(0, len(pdf_texts)):
+    #     print("///////////////     chunk [%d]     ///////////////" % (i+1))
+    #     print(pdf_texts[i])
 
     return len(pdf_texts)
 

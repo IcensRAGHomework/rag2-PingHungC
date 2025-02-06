@@ -23,11 +23,23 @@ def hw02_1(q1_pdf):
 def hw02_2(q2_pdf):
     pdf_loader = PyPDFLoader(q2_pdf)
     pdf_documents = pdf_loader.load()
-    pdf_text_list = [doc.page_content for doc in pdf_documents]
+
+    pdf_text_list = "\n".join(doc.page_content for doc in pdf_documents)
+
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=20,   # 每個塊的最大字符數
-        chunk_overlap=5, # 塊之間的重疊字符數
-        separators=["\n\n", "第"], # 分隔符列表，按優先級排列
+        separators=[r"第\s+.+\s+章",r"第\s+\d+(?:-\d+)?\s+條"],
+        chunk_size=5,
+        chunk_overlap=0,
+        is_separator_regex=True
     )
-    pdf_texts = text_splitter.create_documents(pdf_text_list)
+    
+    pdf_texts = text_splitter.split_text(pdf_text_list)
+
+    # print(len(pdf_texts))
+    # for i in range(0, len(pdf_texts)-1):
+    #     print(pdf_texts[i])
+    #     print("////////////////////////")
+
     return len(pdf_texts)
+
+# hw02_2(q2_pdf)

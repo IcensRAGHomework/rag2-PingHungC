@@ -21,14 +21,13 @@ def hw02_1(q1_pdf):
     return pdf_texts[len(pdf_texts)-1]
 
 def hw02_2(q2_pdf):
-    print(q2_pdf)
     pdf_loader = PyPDFLoader(q2_pdf)
     pdf_documents = pdf_loader.load()
 
     pdf_text_list = "\n".join(doc.page_content for doc in pdf_documents)
 
     text_splitter = RecursiveCharacterTextSplitter(
-        separators=[r"\s+第"],
+        separators=[r"\s+第\s+.+\s+章\s+",r"\s+第\s+.+\s+條\s+"],
         chunk_size=5,
         chunk_overlap=0,
         is_separator_regex=True
